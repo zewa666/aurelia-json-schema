@@ -85,7 +85,7 @@
                   ]
                 },
                 "title": "Bundle dependencies",
-                "description": "A set of dependencies to be included in your bundle"
+                "description": "A set of dependencies to be included in your bundle\n Get more info at http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli/10"
               }
             },
             "type": "object"
