@@ -1,0 +1,10 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+          "**/aurelia.json"
+      ],
+      "url": "./aurelia_json-schema.json"
+    }
+  ]
+}

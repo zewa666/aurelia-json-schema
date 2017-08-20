@@ -1,0 +1,388 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "id": "aurelia.json",
+  "properties": {
+    "build": {
+      "id": "/properties/build",
+      "properties": {
+        "bundles": {
+          "id": "/properties/build/properties/bundles",
+          "items": {
+            "id": "/properties/build/properties/bundles/items",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "id": "/properties/build/properties/bundles/items/properties/name",
+                "type": "string",
+                "title": "Bundle name",
+                "description": "The name of the resulting bundle"
+              },
+              "source": {
+                "id": "/properties/build/properties/bundles/items/properties/source",
+                "items": {
+                  "id": "/properties/build/properties/bundles/items/properties/source/items",
+                  "type": "string",
+                  "title": "Source path",
+                  "description": "A glob pattern defining the resources to include in the bundle"
+                },
+                "type": "array",
+                "title": "Source paths",
+                "description": "A collection of glob patterns to include in the bundle"
+              },
+              "prepend": {
+                "id": "/properties/build/properties/bundles/items/properties/prepend",
+                "items": {
+                  "id": "/properties/build/properties/bundles/items/properties/source/items",
+                  "type": "string",
+                  "title": "Source path",
+                  "description": "A glob pattern defining the resources to prepend in your bundle"
+                },
+                "type": "array",
+                "title": "Files to prepend",
+                "description": "A set of files to prepend to the bundle"
+              },
+              "dependencies": {
+                "id": "/properties/build/properties/bundles/items/properties/dependencies",
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "id": "/properties/build/properties/bundles/items/properties/dependencies/items",
+                      "type": "string",
+                      "title": "Bundle Dependency",
+                      "description": "If the main field of the library's package.json points to the single file that you need to bundle, then you can opt for a simplified configuration by just adding the package name to your dependencies directly",
+                      "default": "your-dependencies-npm-name"
+                    },
+                    {
+                      "id": "/properties/build/properties/bundles/items/properties/dependencies/items",
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/name",
+                          "type": "string",
+                          "title": "Dependency name",
+                          "description": "The name of the dependency"
+                        },
+                        "path": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/path",
+                          "type": "string",
+                          "title": "Relative path to the dependency",
+                          "description": "This is a path to the single module file itself. This path is relative to your application's src folder. Also, you should not include the file extension. .js will be appended automatically"
+                        },
+                        "main": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/main",
+                          "type": ["string", "boolean"],
+                          "title": "Main entry point",
+                          "description": "This is the main module (entry point) of the package, relative to the path. You should not include the file extension. .js will be appended automatically. Specify false if no main entry point is available for your dependency"
+                        }
+                      },
+                      "required": ["name", "path"],
+                      "title": "Bundle Dependency",
+                      "description": "CommonJS package",
+                      "default": "your-dependencies-npm-name"
+                    }
+                  ]
+                },
+                "title": "Bundle dependencies",
+                "description": "A set of dependencies to be included in your bundle"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "loader": {
+          "id": "/properties/build/properties/loader",
+          "properties": {
+            "configTarget": {
+              "id": "/properties/build/properties/loader/properties/configTarget",
+              "type": "string"
+            },
+            "includeBundleMetadataInConfig": {
+              "id": "/properties/build/properties/loader/properties/includeBundleMetadataInConfig",
+              "type": "string"
+            },
+            "plugins": {
+              "id": "/properties/build/properties/loader/properties/plugins",
+              "items": {
+                "id": "/properties/build/properties/loader/properties/plugins/items",
+                "properties": {
+                  "extensions": {
+                    "id": "/properties/build/properties/loader/properties/plugins/items/properties/extensions",
+                    "items": {
+                      "id": "/properties/build/properties/loader/properties/plugins/items/properties/extensions/items",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "id": "/properties/build/properties/loader/properties/plugins/items/properties/name",
+                    "type": "string"
+                  },
+                  "stub": {
+                    "id": "/properties/build/properties/loader/properties/plugins/items/properties/stub",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "type": {
+              "id": "/properties/build/properties/loader/properties/type",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "options": {
+          "id": "/properties/build/properties/options",
+          "properties": {
+            "minify": {
+              "id": "/properties/build/properties/options/properties/minify",
+              "type": "string"
+            },
+            "sourcemaps": {
+              "id": "/properties/build/properties/options/properties/sourcemaps",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "targets": {
+          "id": "/properties/build/properties/targets",
+          "items": {
+            "id": "/properties/build/properties/targets/items",
+            "properties": {
+              "baseDir": {
+                "id": "/properties/build/properties/targets/items/properties/baseDir",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "/properties/build/properties/targets/items/properties/displayName",
+                "type": "string"
+              },
+              "id": {
+                "id": "/properties/build/properties/targets/items/properties/id",
+                "type": "string"
+              },
+              "index": {
+                "id": "/properties/build/properties/targets/items/properties/index",
+                "type": "string"
+              },
+              "output": {
+                "id": "/properties/build/properties/targets/items/properties/output",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "bundler": {
+      "id": "/properties/bundler",
+      "properties": {
+        "displayName": {
+          "id": "/properties/bundler/properties/displayName",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/bundler/properties/id",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "cssProcessor": {
+      "id": "/properties/cssProcessor",
+      "properties": {
+        "displayName": {
+          "id": "/properties/cssProcessor/properties/displayName",
+          "type": "string"
+        },
+        "fileExtension": {
+          "id": "/properties/cssProcessor/properties/fileExtension",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/cssProcessor/properties/id",
+          "type": "string"
+        },
+        "source": {
+          "id": "/properties/cssProcessor/properties/source",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "editor": {
+      "id": "/properties/editor",
+      "properties": {
+        "displayName": {
+          "id": "/properties/editor/properties/displayName",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/editor/properties/id",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "markupProcessor": {
+      "id": "/properties/markupProcessor",
+      "properties": {
+        "displayName": {
+          "id": "/properties/markupProcessor/properties/displayName",
+          "type": "string"
+        },
+        "fileExtension": {
+          "id": "/properties/markupProcessor/properties/fileExtension",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/markupProcessor/properties/id",
+          "type": "string"
+        },
+        "source": {
+          "id": "/properties/markupProcessor/properties/source",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "name": {
+      "id": "/properties/name",
+      "type": "string",
+      "title": "App name",
+      "description": "The name of your app"
+    },
+    "paths": {
+      "id": "/properties/paths",
+      "properties": {
+        "attributes": {
+          "id": "/properties/paths/properties/attributes",
+          "type": "string"
+        },
+        "bindingBehaviors": {
+          "id": "/properties/paths/properties/bindingBehaviors",
+          "type": "string"
+        },
+        "elements": {
+          "id": "/properties/paths/properties/elements",
+          "type": "string"
+        },
+        "resources": {
+          "id": "/properties/paths/properties/resources",
+          "type": "string"
+        },
+        "root": {
+          "id": "/properties/paths/properties/root",
+          "type": "string"
+        },
+        "valueConverters": {
+          "id": "/properties/paths/properties/valueConverters",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "platform": {
+      "id": "/properties/platform",
+      "properties": {
+        "baseDir": {
+          "id": "/properties/platform/properties/baseDir",
+          "type": "string"
+        },
+        "displayName": {
+          "id": "/properties/platform/properties/displayName",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/platform/properties/id",
+          "type": "string"
+        },
+        "index": {
+          "id": "/properties/platform/properties/index",
+          "type": "string"
+        },
+        "output": {
+          "id": "/properties/platform/properties/output",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "testFramework": {
+      "id": "/properties/testFramework",
+      "properties": {
+        "displayName": {
+          "id": "/properties/testFramework/properties/displayName",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/testFramework/properties/id",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "transpiler": {
+      "id": "/properties/transpiler",
+      "properties": {
+        "displayName": {
+          "id": "/properties/transpiler/properties/displayName",
+          "type": "string"
+        },
+        "dtsSource": {
+          "id": "/properties/transpiler/properties/dtsSource",
+          "items": {
+            "id": "/properties/transpiler/properties/dtsSource/items",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "fileExtension": {
+          "id": "/properties/transpiler/properties/fileExtension",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/transpiler/properties/id",
+          "type": "string"
+        },
+        "source": {
+          "id": "/properties/transpiler/properties/source",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "type": {
+      "id": "/properties/type",
+      "type": "string"
+    },
+    "unitTestRunner": {
+      "id": "/properties/unitTestRunner",
+      "properties": {
+        "displayName": {
+          "id": "/properties/unitTestRunner/properties/displayName",
+          "type": "string"
+        },
+        "id": {
+          "id": "/properties/unitTestRunner/properties/id",
+          "type": "string"
+        },
+        "source": {
+          "id": "/properties/unitTestRunner/properties/source",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "object"
+}
