@@ -75,12 +75,35 @@
                           "type": ["string", "boolean"],
                           "title": "Main entry point",
                           "description": "This is the main module (entry point) of the package, relative to the path. You should not include the file extension. .js will be appended automatically. Specify false if no main entry point is available for your dependency"
+                        },
+                        "env": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/env",
+                          "type": ["string"],
+                          "title": "Environment conditional bundling",
+                          "description": "This can be used on any dependency in the bundle to indicate what environment builds the dependency should be included in. By default, dependencies are included in all builds."
+                        },
+                        "resources": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/resources",
+                          "type": ["array"],
+                          "title": "Additional library resources",
+                          "description": "Provide a list of additional files to be included with the bundle"
+                        },
+                        "export": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/export",
+                          "type": ["string"],
+                          "title": "Global export",
+                          "description": "This is the name of the global variable that should be used as the exported value of the module"
+                        },
+                        "deps": {
+                          "id": "/properties/build/properties/bundles/items/properties/dependencies/items/properties/deps",
+                          "type": ["array"],
+                          "title": "Legacy library dependencies",
+                          "description": "This is an array of dependencies which must be loaded and available before the legacy library can be evaluated"
                         }
                       },
                       "required": ["name", "path"],
                       "title": "Bundle Dependency",
-                      "description": "CommonJS package",
-                      "default": "your-dependencies-npm-name"
+                      "description": "Complex package"
                     }
                   ]
                 },
@@ -90,14 +113,26 @@
             },
             "type": "object"
           },
-          "type": "array"
+          "type": "array",
+          "title": "Application bundles",
+          "description": "Define bundles created during the build"
+        },
+        "copyFiles": {
+          "id": "/properties/build/properties/copyFiles",
+          "title": "Copy files",
+          "description": "A dictionary (file:destination) specifying files to copy after build",
+          "type":"object"
         },
         "loader": {
           "id": "/properties/build/properties/loader",
+          "title": "Loader configuration",
+          "description": "Configuring the loader (e.g RequireJS) for the CLI",
           "properties": {
             "configTarget": {
               "id": "/properties/build/properties/loader/properties/configTarget",
-              "type": "string"
+              "type": "string",
+              "title": "Configuration target",
+              "description": "The target bundle where additional loader configs will be appended to the bottom of the file"
             },
             "includeBundleMetadataInConfig": {
               "id": "/properties/build/properties/loader/properties/includeBundleMetadataInConfig",
@@ -114,11 +149,15 @@
                       "id": "/properties/build/properties/loader/properties/plugins/items/properties/extensions/items",
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "title": "Plugin extensions",
+                    "description": "Extensions to be processed by the plugin"
                   },
                   "name": {
                     "id": "/properties/build/properties/loader/properties/plugins/items/properties/name",
-                    "type": "string"
+                    "type": "string",
+                    "title": "Plugin name",
+                    "description": "The name of the plugin"
                   },
                   "stub": {
                     "id": "/properties/build/properties/loader/properties/plugins/items/properties/stub",
@@ -127,11 +166,21 @@
                 },
                 "type": "object"
               },
-              "type": "array"
+              "type": "array",
+              "title": "Loader plugins",
+              "description": "Configure additional loader plugins (e.g. text-plugin, json-plugin ...)"
             },
             "type": {
               "id": "/properties/build/properties/loader/properties/type",
-              "type": "string"
+              "type": "string",
+              "title": "Loader type",
+              "description": "The type of the loader to use"
+            },
+            "config": {
+              "id": "/properties/build/properties/loader/properties/config",
+              "type": "object",
+              "title": "Loader configs",
+              "description": "Additional configuration specifically for the selected loader type"
             }
           },
           "type": "object"
@@ -141,14 +190,26 @@
           "properties": {
             "minify": {
               "id": "/properties/build/properties/options/properties/minify",
-              "type": "string"
+              "type": "string",
+              "title": "Minification",
+              "description": "Minify builds for given environments"
             },
             "sourcemaps": {
               "id": "/properties/build/properties/options/properties/sourcemaps",
-              "type": "string"
+              "type": "string",
+              "title": "Create sourcemaps",
+              "description": "Create sourcemaps for given environments"
+            },
+            "rev": {
+              "id": "/properties/build/properties/options/properties/rev",
+              "type": "boolean",
+              "title": "Build revisions",
+              "description": "To create builds with revision numbers, you must set rev to true. This will cause a unique revision number to be added to the bundled files"
             }
           },
-          "type": "object"
+          "type": "object",
+          "title": "Build options",
+          "description": "Setup minification, sourcemaps and revision support"
         },
         "targets": {
           "id": "/properties/build/properties/targets",
@@ -161,19 +222,27 @@
               },
               "displayName": {
                 "id": "/properties/build/properties/targets/items/properties/displayName",
-                "type": "string"
+                "type": "string",
+                "title": "Displayname",
+                "description": "The name to display for the target application"
               },
               "id": {
                 "id": "/properties/build/properties/targets/items/properties/id",
-                "type": "string"
+                "type": "string",
+                "title": "Target id",
+                "description": "The id for the target application"
               },
               "index": {
                 "id": "/properties/build/properties/targets/items/properties/index",
-                "type": "string"
+                "type": "string",
+                "title": "App start file",
+                "description": "The default start file for the application"
               },
               "output": {
                 "id": "/properties/build/properties/targets/items/properties/output",
-                "type": "string"
+                "type": "string",
+                "title": "Output folder",
+                "description": "The folder where the built application will be copied to"
               }
             },
             "type": "object"
@@ -202,22 +271,32 @@
       "properties": {
         "displayName": {
           "id": "/properties/cssProcessor/properties/displayName",
-          "type": "string"
+          "type": "string",
+          "title": "Display name",
+          "description": "The name to display for the selected css processor"
         },
         "fileExtension": {
           "id": "/properties/cssProcessor/properties/fileExtension",
-          "type": "string"
+          "type": "string",
+          "title": "File extension",
+          "description": "The file extension to use for the preprocessor"
         },
         "id": {
           "id": "/properties/cssProcessor/properties/id",
-          "type": "string"
+          "type": "string",
+          "title": "CSS preprocessor id",
+          "description": "The id of the selected css preprocssor"
         },
         "source": {
           "id": "/properties/cssProcessor/properties/source",
-          "type": "string"
+          "type": "string",
+          "title": "CSS preprocessor sources",
+          "description": "A glob pattern pointing to the sources to be targeted by the css preprocessor"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "CSS Processor",
+      "description": "Define the used CSS Pre/processor"
     },
     "editor": {
       "id": "/properties/editor",
@@ -231,29 +310,42 @@
           "type": "string"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Editor",
+      "description": "The used editor along preconfigured defaults"
     },
     "markupProcessor": {
       "id": "/properties/markupProcessor",
       "properties": {
         "displayName": {
           "id": "/properties/markupProcessor/properties/displayName",
-          "type": "string"
+          "type": "string",
+          "title": "Displayname",
+          "description": "The name to display of the markup processor"
         },
         "fileExtension": {
           "id": "/properties/markupProcessor/properties/fileExtension",
-          "type": "string"
+          "type": "string",
+          "title": "Markup file extensions",
+          "description": "The file extensions to target by the markup processor"
         },
         "id": {
           "id": "/properties/markupProcessor/properties/id",
-          "type": "string"
+          "type": "string",
+          "title": "Markup processor id",
+          "description": "The id of the markup processor"
         },
         "source": {
           "id": "/properties/markupProcessor/properties/source",
-          "type": "string"
+          "type": "string",
+          "title": "Markup source",
+          "description": "A glob pattern to the markup sources"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Markup processor",
+      "description": "Configure the markup processor",
+      "required": ["id", "displayName", "fileExtension", "source"]
     },
     "name": {
       "id": "/properties/name",
@@ -289,7 +381,9 @@
           "type": "string"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Path mappings",
+      "description": "Path mappings for the loader"
     },
     "platform": {
       "id": "/properties/platform",
@@ -322,21 +416,30 @@
       "properties": {
         "displayName": {
           "id": "/properties/testFramework/properties/displayName",
-          "type": "string"
+          "type": "string",
+          "title": "Test framework name",
+          "description": "The name to display for the used test framework"
         },
         "id": {
           "id": "/properties/testFramework/properties/id",
-          "type": "string"
+          "type": "string",
+          "title": "Test framework id",
+          "description": "The id of the used test framework"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Test framework",
+      "description": "The used test framework",
+      "required": ["displayName", "id"]
     },
     "transpiler": {
       "id": "/properties/transpiler",
       "properties": {
         "displayName": {
           "id": "/properties/transpiler/properties/displayName",
-          "type": "string"
+          "type": "string",
+          "title": "Displayname",
+          "description": "The name to display for the selected transpiler"
         },
         "dtsSource": {
           "id": "/properties/transpiler/properties/dtsSource",
@@ -344,22 +447,39 @@
             "id": "/properties/transpiler/properties/dtsSource/items",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "title": "d.ts source",
+          "description": "Glob pattern to type definitions"
         },
         "fileExtension": {
           "id": "/properties/transpiler/properties/fileExtension",
-          "type": "string"
+          "type": "string",
+          "title": "File extension",
+          "description": "File extensions to be processed by the transpiler"
         },
         "id": {
           "id": "/properties/transpiler/properties/id",
-          "type": "string"
+          "type": "string",
+          "title": "Transpiler id",
+          "description": "The id of the transpiler"
         },
         "source": {
           "id": "/properties/transpiler/properties/source",
-          "type": "string"
+          "type": "string",
+          "title": "Transpiler sources",
+          "description": "A glob pattern for the sources processed by the transpiler"
+        },
+        "options": {
+          "id": "/properties/transpiler/properties/options",
+          "type": "object",
+          "title": "Transpiler options",
+          "description": "Addtional options to pass to the transpiler"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Transpiler",
+      "description": "The transpiler chosen for the app",
+      "required": ["displayName", "id", "fileExtension", "source"]
     },
     "type": {
       "id": "/properties/type",
@@ -378,10 +498,16 @@
         },
         "source": {
           "id": "/properties/unitTestRunner/properties/source",
-          "type": "string"
+          "type": "string",
+          "title": "Test source files",
+          "description": "Pointing to the spec files of your application",
+          "default": "test/unit/**/*.js"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Test runner",
+      "description": "The testrunner used for your application",
+      "required": ["displayName", "id", "source"]
     }
   },
   "type": "object"
