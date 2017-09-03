@@ -345,7 +345,7 @@
           "id": "/properties/markupProcessor/properties/source",
           "type": ["string", "array"],
           "title": "Markup source",
-          "description": "A glob pattern (or array of glob patterns) to the markup sources"
+          "description": "A glob pattern (or array of glob patterns) to the markup sources. In case of Webpack this can be an empty string."
         }
       },
       "type": "object",
@@ -397,6 +397,27 @@
           "type": "string",
           "title": "Output",
           "description": "A folder relative from project root where the bundles will be created"
+        },
+        "hmr": {
+          "id": "/properties/platform/properties/hmr",
+          "type": "boolean",
+          "default": false,
+          "title": "(ONLY WP) Hot Module Reloading",
+          "description": "ONLY FOR WEBPACK. Define whether hot module reloading should be used with the dev server"
+        },
+        "port": {
+          "id": "/properties/platform/properties/port",
+          "type": "integer",
+          "default": 8080,
+          "title": "(ONLY WP) Dev Server Port",
+          "description": "ONLY FOR WEBPACK. Define the default port to be used for the dev server"
+        },
+        "open": {
+          "id": "/properties/platform/properties/port",
+          "type": "boolean",
+          "default": false,
+          "title": "(ONLY WP) Auto open default browser",
+          "description": "ONLY FOR WEBPACK. Should the default browser be opened automatically"
         }
       },
       "type": "object",
@@ -459,7 +480,7 @@
           "id": "/properties/transpiler/properties/source",
           "type": ["string", "array"],
           "title": "Transpiler sources",
-          "description": "A glob pattern (or array of glob patterns) for the sources processed by the transpiler"
+          "description": "A glob pattern (or array of glob patterns) for the sources processed by the transpiler. In case of Webpack this can be an empty string"
         },
         "options": {
           "id": "/properties/transpiler/properties/options",
@@ -484,23 +505,27 @@
       "properties": {
         "displayName": {
           "id": "/properties/unitTestRunner/properties/displayName",
-          "type": "string"
+          "type": "string",
+          "title": "Display name",
+          "description": "The name of the configured testrunner"
         },
         "id": {
           "id": "/properties/unitTestRunner/properties/id",
-          "type": "string"
+          "type": "string",
+          "title": "Testrunner Id",
+          "description": "The id of the configured testrunner"
         },
         "source": {
           "id": "/properties/unitTestRunner/properties/source",
           "type": "string",
           "title": "Test source files",
-          "description": "Pointing to the spec files of your application",
+          "description": "Pointing to the spec files of your application. Can be empty for Webpack",
           "default": "test/unit/**/*.js"
         }
       },
-      "type": "object",
+      "type": ["object", "array"],
       "title": "Test runner",
-      "description": "The testrunner used for your application",
+      "description": "The testrunner used for your application. In case of Webpack this should be an array of testrunner configurations",
       "required": ["displayName", "id", "source"]
     }
   },
