@@ -413,7 +413,7 @@
           "description": "ONLY FOR WEBPACK. Define the default port to be used for the dev server"
         },
         "open": {
-          "id": "/properties/platform/properties/port",
+          "id": "/properties/platform/properties/open",
           "type": "boolean",
           "default": false,
           "title": "(ONLY WP) Auto open default browser",
