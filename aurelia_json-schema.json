@@ -16,15 +16,15 @@
                 "id": "/properties/build/properties/bundles/items/properties/name",
                 "type": "string",
                 "title": "Bundle name",
-                "description": "The name of the resulting bundle"
+                "description": "The name of the resulting bundle (with .js extension)"
               },
               "source": {
                 "id": "/properties/build/properties/bundles/items/properties/source",
                 "items": {
                   "id": "/properties/build/properties/bundles/items/properties/source/items",
-                  "type": "string",
+                  "type": ["string", "array"],
                   "title": "Source path",
-                  "description": "A glob pattern defining the resources to include in the bundle"
+                  "description": "A glob pattern (or array of glob patterns) defining the resources to include in the bundle"
                 },
                 "type": "array",
                 "title": "Source paths",
@@ -34,9 +34,9 @@
                 "id": "/properties/build/properties/bundles/items/properties/prepend",
                 "items": {
                   "id": "/properties/build/properties/bundles/items/properties/source/items",
-                  "type": "string",
+                  "type": ["string", "array"],
                   "title": "Source path",
-                  "description": "A glob pattern defining the resources to prepend in your bundle"
+                  "description": "A glob pattern (or array of glob patterns) defining the resources to prepend in your bundle"
                 },
                 "type": "array",
                 "title": "Files to prepend",
@@ -136,7 +136,9 @@
             },
             "includeBundleMetadataInConfig": {
               "id": "/properties/build/properties/loader/properties/includeBundleMetadataInConfig",
-              "type": "string"
+              "type": "string",
+              "title": "includeBundleMetadataInConfig",
+              "description": "Whether to include a \"bundles\" property in the loader configuration. http://requirejs.org/docs/api.html#config-bundles"
             },
             "plugins": {
               "id": "/properties/build/properties/loader/properties/plugins",
@@ -161,7 +163,9 @@
                   },
                   "stub": {
                     "id": "/properties/build/properties/loader/properties/plugins/items/properties/stub",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "title": "Stub",
+                    "description": "If set to true the plugin won't be included in the bundle, resulting in a smaller bundle size. But you can't use the plugin at runtime for files that aren't in the bundle."
                   }
                 },
                 "type": "object"
@@ -289,9 +293,9 @@
         },
         "source": {
           "id": "/properties/cssProcessor/properties/source",
-          "type": "string",
+          "type": ["string", "array"],
           "title": "CSS preprocessor sources",
-          "description": "A glob pattern pointing to the sources to be targeted by the css preprocessor"
+          "description": "A glob pattern (or array of glob patterns) pointing to the sources to be targeted by the css preprocessor"
         }
       },
       "type": "object",
@@ -337,9 +341,9 @@
         },
         "source": {
           "id": "/properties/markupProcessor/properties/source",
-          "type": "string",
+          "type": ["string", "array"],
           "title": "Markup source",
-          "description": "A glob pattern to the markup sources"
+          "description": "A glob pattern (or array of glob patterns) to the markup sources"
         }
       },
       "type": "object",
@@ -355,42 +359,18 @@
     },
     "paths": {
       "id": "/properties/paths",
-      "properties": {
-        "attributes": {
-          "id": "/properties/paths/properties/attributes",
-          "type": "string"
-        },
-        "bindingBehaviors": {
-          "id": "/properties/paths/properties/bindingBehaviors",
-          "type": "string"
-        },
-        "elements": {
-          "id": "/properties/paths/properties/elements",
-          "type": "string"
-        },
-        "resources": {
-          "id": "/properties/paths/properties/resources",
-          "type": "string"
-        },
-        "root": {
-          "id": "/properties/paths/properties/root",
-          "type": "string"
-        },
-        "valueConverters": {
-          "id": "/properties/paths/properties/valueConverters",
-          "type": "string"
-        }
-      },
       "type": "object",
       "title": "Path mappings",
-      "description": "Path mappings for the loader"
+      "description": "Path mappings for the loader. These will be included into the loader configuration (RequireJS/SystemJS)."
     },
     "platform": {
       "id": "/properties/platform",
       "properties": {
         "baseDir": {
           "id": "/properties/platform/properties/baseDir",
-          "type": "string"
+          "type": "string",
+          "title": "baseDir",
+          "description": "Browsersync (au run) will serve from this directory"
         },
         "displayName": {
           "id": "/properties/platform/properties/displayName",
@@ -402,14 +382,20 @@
         },
         "index": {
           "id": "/properties/platform/properties/index",
-          "type": "string"
+          "type": "string",
+          "title": "Index file (index.html)",
+          "description": "Path relative from project root to the index.html file. CLI updates script tags in this file on build"
         },
         "output": {
           "id": "/properties/platform/properties/output",
-          "type": "string"
+          "type": "string",
+          "title": "Output",
+          "description": "A folder relative from project root where the bundles will be created"
         }
       },
-      "type": "object"
+      "type": "object",
+      "title": "Platform",
+      "description": "Settings for the development platform"
     },
     "testFramework": {
       "id": "/properties/testFramework",
@@ -465,9 +451,9 @@
         },
         "source": {
           "id": "/properties/transpiler/properties/source",
-          "type": "string",
+          "type": ["string", "array"],
           "title": "Transpiler sources",
-          "description": "A glob pattern for the sources processed by the transpiler"
+          "description": "A glob pattern (or array of glob patterns) for the sources processed by the transpiler"
         },
         "options": {
           "id": "/properties/transpiler/properties/options",
