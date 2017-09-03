@@ -222,7 +222,9 @@
             "properties": {
               "baseDir": {
                 "id": "/properties/build/properties/targets/items/properties/baseDir",
-                "type": "string"
+                "type": "string",
+                "title": "BaseDir",
+                "description": "The baseDir for serving the build target"
               },
               "displayName": {
                 "id": "/properties/build/properties/targets/items/properties/displayName",
@@ -361,7 +363,7 @@
       "id": "/properties/paths",
       "type": "object",
       "title": "Path mappings",
-      "description": "Path mappings for the loader. These will be included into the loader configuration (RequireJS/SystemJS)."
+      "description": "Path mappings (key/value) for the loader. These will be included into the loader configuration (RequireJS/SystemJS)."
     },
     "platform": {
       "id": "/properties/platform",
@@ -369,16 +371,20 @@
         "baseDir": {
           "id": "/properties/platform/properties/baseDir",
           "type": "string",
-          "title": "baseDir",
+          "title": "BaseDir",
           "description": "Browsersync (au run) will serve from this directory"
         },
         "displayName": {
           "id": "/properties/platform/properties/displayName",
-          "type": "string"
+          "type": "string",
+          "title": "Display name",
+          "description": "The name of the platform specific build"
         },
         "id": {
           "id": "/properties/platform/properties/id",
-          "type": "string"
+          "type": "string",
+          "title": "Platform id",
+          "description": "The id of the platform specific build"
         },
         "index": {
           "id": "/properties/platform/properties/index",
@@ -469,7 +475,9 @@
     },
     "type": {
       "id": "/properties/type",
-      "type": "string"
+      "type": "string",
+      "title": "Scaffold type",
+      "description": "The CLI application type scaffolded"
     },
     "unitTestRunner": {
       "id": "/properties/unitTestRunner",
